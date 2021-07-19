@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}User Info{% endblock %}
+
+{% block content %}
+
+<h1 class="display-1">User Information</h1>
+
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+        {% for category, msg in messages %}
+            <p class="{{ category }}">{{ msg }}</p>
+        {% endfor %}
+    {% endif %}
+{% endwith %}
+
+<ul>
+    <li>Name: {{user.first_name}} {{user.last_name}}</li>
+    <li>Username: {{user.username}}</li>
+    <li>Email: {{user.email}}</li>
+</ul>
+
+<a href="/users/{{user.username}}/feedback/add" class="btn btn-success">Add Feedback</a>
+<a href="/users/{{user.username}}/delete" class="btn btn-danger">Delete User</a>
+
+{% if user.feedback %}
+<h4 class="section-head">Feedback:</h4>
+<div class="container">
+    {% for item in user.feedback %}
+    <div class="card">
+        <div class="card-body feedback">
+            <h5>{{ item.title }}</h5>
+            <p>{{item.content}}</p>
+            <a href="/feedback/{{item.id}}/update" class="btn btn-info">Edit</a>
+            <a href="/feedback/{{item.id}}/delete" class="btn btn-danger">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+
+
+
+{% endblock %}
