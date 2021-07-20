@@ -20,21 +20,52 @@
     <li>Email: {{user.email}}</li>
 </ul>
 
-<a href="/users/{{user.username}}/feedback/add" class="btn btn-success">Add Feedback</a>
+    <form>
+        {{form.hidden_tag()}}
+        <button class="btn btn-success"
+                formmethod="GET"
+                formaction="/users/{{user.username}}/feedback/add">
+          Add Feedback
+        </button>
+        <button class="btn btn-danger"
+                formmethod="POST"
+                formaction="/users/{{user.username}}/delete">
+          Delete User
+        </button>
+        <button class="btn btn-info"
+                formmethod="GET"
+                formaction="/logout">
+          Add Feedback
+        </button>
+    </form>
+
+<!-- <a href="/users/{{user.username}}/feedback/add" class="btn btn-success">Add Feedback</a>
 <a href="/users/{{user.username}}/delete" class="btn btn-danger">Delete User</a>
+<a href="/logout" class="btn btn-info">Logout</a> -->
 
 {% if user.feedback %}
 <h4 class="section-head">Feedback:</h4>
 <div class="container">
-    {% for item in user.feedback %}
+    {% for feedback in user.feedback %}
     <div class="card">
         <div class="card-body feedback">
-            <h5>{{ item.title }}</h5>
-            <p>{{item.content}}</p>
-            <a href="/feedback/{{item.id}}/update" class="btn btn-info">Edit</a>
-            <a href="/feedback/{{item.id}}/delete" class="btn btn-danger">Delete</a>
+            <h5>{{ feedback.title }}</h5>
+            <p>{{feedback.content}}</p>
         </div>
     </div>
+    <form>
+        {{form.hidden_tag()}}
+        <button class="btn btn-warning"
+                formmethod="GET"
+                formaction="/feedback/{{ feedback.id }}/update">
+          Edit
+        </button>
+        <button class="btn btn-danger"
+                formmethod="POST"
+                formaction="/feedback/{{ feedback.id }}/delete">
+          Delete
+        </button>
+    </form>
     {% endfor %}
 </div>
 {% endif %}

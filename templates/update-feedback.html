@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Update Feedback{% endblock %}
 
 {% block content %}
 
-<h1 class="display-1">Log In</h1>
-<p class="lead">Enter your information below to log in!</p>
-<p class="lead">Don't have an account? Click <a href="/register">here</a> to sign up!</p>
+<h1 class="display-1">Update Feedback</h1>
+<p class="lead">Enter the title and content of your feedback below.</p>
 
 {% with messages = get_flashed_messages(with_categories=true) %}
     {% if messages %}
@@ -31,7 +30,7 @@
         </p>
     {% endfor %}
 
-    <button class="btn btn-info" type="submit">Login</button>
+    <button class="btn btn-info" type="submit">Update Feedback</button>
 
 </form>
 {% endblock %}
